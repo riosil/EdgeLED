@@ -2,15 +2,15 @@
 
  Tiny controller for addressable LEDs
 
-![Example edge lit sign](file:///C:/Users/Maji/Documents/GitHub/EdgeLEDcontroller/images/keep_calm_sign.jpg)
+![Example edge lit sign](../blob/master/images/keep_calm_sign.jpg)
 
 Addressable type WS2812B LED lights in 3.5mm square packages for edge lighting acrylic signs and displays. The controller is built into a USB plug and programmed with Arduino sketches through the USB. Addressable LEDs can be used to dynamically paint signs and models with light. Having the controller built in the plug allows the lighting strip to fit in very slim spaces, for example inside a 6mm [slide binder](https://www.amazon.co.uk/gp/product/B00JPJA7QY).
 
 **Security: by default the controller only takes power from the USB - it only requires power from a USB charger. If plugged into a computer, it will not enumerate as a USB device unless the on-board switch is held down as the plug is inserted.** This tiny switch is hard to operate accidentally.
 
-![Edge LED controller](file:///C:/Users/Maji/Documents/GitHub/EdgeLEDcontroller/images/usb_board.jpg)
+![Edge LED controller](../blob/master/images/usb_board.jpg)
 
-##Programming
+## Programming
 
 The controller uses a ATtiny85 programmed with the [Micronucleus](https://github.com/micronucleus/micronucleus.git) bootloader. The controller will only appear as a programmable device if the button (on PB0) is pressed as the controller is plugged into the USB host. Programs can then be loaded via USB using the Arduino IDE with board selection set to: "Digispark (Default - 16.5MHz)."
 
@@ -35,7 +35,7 @@ Want to program the bootloader but don't want to compile the code? Version 2.04 
 
 **Note** if bootloader v2.04 is installed, assert PB3 low to stop USB enumeration messages. See the example sketch for details. Using bootloader 2.xx gives user programs access to USB but this is disabled in all the examples by asserting PB3 low in each sketch setup section.
 
-##Downloads
+## Downloads
 
 This example sketch uses the FadeLED library to smoothly cycle the LEDs through their range of hues. Each press of the on-board switch steps through the colours of the rainbow, back to the rainbow fade. Uses 4720 bytes (72%) of program storage space, 137 bytes of dynamic memory.
 
@@ -45,7 +45,7 @@ Controller schematic (pdf) and KiCAD files; connectors J2 and J3 are for program
 
 This flexible 4mm wide [LED strip](https://www.aliexpress.com/item/32889698964.html) from AliExpress is now the preferred strip. The connections are surprisingly secure when sealed with this adhesive lined [heat shrink tubing](https://www.aliexpress.com/item/32892500051.html) (4.8mm diameter) and a small piece of reinforcing plastic shim.
 
-##Updates
+## Updates
 
 * 6 June 2019 - received a batch of SFH3710 phototransistors from China. Simple mod enables auto dimming in the dark. See comments in the example sketch.
 
