@@ -35,6 +35,10 @@ Want to program the bootloader but don't want to compile the code? Version 2.04 
 
 **Note** if bootloader v2.04 is installed, assert PB3 low to stop USB enumeration messages. See the example sketch for details. Using bootloader 2.xx gives user programs access to USB but this is disabled in all the examples by asserting PB3 low in each sketch setup section.
 
+The cable is 4-wire flexible telephone extension cord where the length is limited by transients but 3m has worked OK. It was found that using two ground wires does not significantly reduce transients.
+
+![Flexible 5mm wide LED strip](https://raw.githubusercontent.com/riosil/EdgeLEDcontroller/master/images/led_flex_strip.jpg)
+
 ## Files
 
 The example sketch *EdgeLEDDemo* uses the FadeLED library to smoothly cycle the LEDs through their range of hues. Each press of the on-board switch steps through the colours of the rainbow, back to the rainbow fade. Uses 4720 bytes (72%) of program storage space, 137 bytes of dynamic memory.
