@@ -2,13 +2,13 @@
 
  Tiny controller for addressable LEDs
 
-![Example edge lit sign](../blob/master/images/keep_calm_sign.jpg)
+![Example edge lit sign](https://raw.githubusercontent.com/riosil/EdgeLEDcontroller/master/images/keep_calm_sign.jpg)
 
 Addressable type WS2812B LED lights in 3.5mm square packages for edge lighting acrylic signs and displays. The controller is built into a USB plug and programmed with Arduino sketches through the USB. Addressable LEDs can be used to dynamically paint signs and models with light. Having the controller built in the plug allows the lighting strip to fit in very slim spaces, for example inside a 6mm [slide binder](https://www.amazon.co.uk/gp/product/B00JPJA7QY).
 
 **Security: by default the controller only takes power from the USB - it only requires power from a USB charger. If plugged into a computer, it will not enumerate as a USB device unless the on-board switch is held down as the plug is inserted.** This tiny switch is hard to operate accidentally.
 
-![Edge LED controller](../blob/master/images/usb_board.jpg)
+![Edge LED controller](https://raw.githubusercontent.com/riosil/EdgeLEDcontroller/master/images/usb_board.jpg)
 
 ## Programming
 
@@ -35,11 +35,11 @@ Want to program the bootloader but don't want to compile the code? Version 2.04 
 
 **Note** if bootloader v2.04 is installed, assert PB3 low to stop USB enumeration messages. See the example sketch for details. Using bootloader 2.xx gives user programs access to USB but this is disabled in all the examples by asserting PB3 low in each sketch setup section.
 
-## Downloads
+## Files
 
-This example sketch uses the FadeLED library to smoothly cycle the LEDs through their range of hues. Each press of the on-board switch steps through the colours of the rainbow, back to the rainbow fade. Uses 4720 bytes (72%) of program storage space, 137 bytes of dynamic memory.
+The example sketch *EdgeLEDDemo* uses the FadeLED library to smoothly cycle the LEDs through their range of hues. Each press of the on-board switch steps through the colours of the rainbow, back to the rainbow fade. Uses 4720 bytes (72%) of program storage space, 137 bytes of dynamic memory.
 
-This example sketch for [Makespace](images/sign_makespace.jpg	) has two rows of nine LEDs (LED zero nearest the cable entry). The default sequence rapidly fades up white light, then slowly increases colour saturation before going dark and starting over. Uses 4678 bytes (71%) of program storage space, 167 bytes of dynamic memory.
+This example sketch for Makespace has [two rows of nine LEDs](https://raw.githubusercontent.com/riosil/EdgeLEDcontroller/master/images/sign_makespace.jpg) (LED zero nearest the cable entry). The default sequence rapidly fades up white light, then slowly increases colour saturation before going dark and starting over. Uses 4678 bytes (71%) of program storage space, 167 bytes of dynamic memory.
 
 Controller schematic (pdf) and KiCAD files; connectors J2 and J3 are for programming the bootloader, J3 connects the LED strip. The optional SFH3710 phototransistor connection is between SCK and GND.
 
