@@ -1,8 +1,10 @@
 # EdgeLEDcontroller
 
- Tiny controller for addressable LEDs
+ Tiny controller for addressable LEDs enables edge lighting in tight spaces.
 
 ![Example edge lit sign](https://raw.githubusercontent.com/riosil/EdgeLEDcontroller/master/images/keep_calm_sign.jpg)
+
+This is where the the prototypes were made. There is an example two-layer display at the end of the video: https://www.instagram.com/p/CSuGmHmoO2C/
 
 Addressable type WS2812B LED lights in 3.5mm square packages for edge lighting acrylic signs and displays. The controller is built into a USB plug and programmed with Arduino sketches through the USB. Addressable LEDs can be used to dynamically paint signs and models with light. Having the controller built in the plug allows the lighting strip to fit in very slim spaces, for example inside a 6mm [slide binder](https://www.amazon.co.uk/gp/product/B00JPJA7QY).
 
