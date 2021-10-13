@@ -17,7 +17,7 @@ Example *(adjust port for operating system):*
 See:  
 https://www.fischl.de/usbasp/
 
-    avrdude -c usbasp -p t85 -U micronucleus-2.04-entry_jumper_pb0.hex -U lfuse:w:0xe1:m -U hfuse:w:0xdd:m -U efuse:w:0xfe:m
+    avrdude -c usbasp -p t85 -U micronucleus-2.5-entry_jumper_pb0.hex -U lfuse:w:0xe1:m -U hfuse:w:0xdd:m -U efuse:w:0xfe:m
 
 ### Connections:
 
@@ -47,8 +47,6 @@ To (bootloader version 2.04):
 Or (bootloader version 2.5):
 
     digispark-tiny.upload.maximum_size=6586
-
-An extra 574 bytes (9.5%).
 
 ## Licence
 
