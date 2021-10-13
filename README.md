@@ -37,11 +37,12 @@ Space for user code is:
 
 | Version| Program space (bytes)|
 |------------------|---------------------|
+| v1.02            | 6012                |
 | v1.11            | 6330                |
 | v2.04            | 6522                |
-| v2.5             | 6586
+| v2.5             | 6586                |
 
-The version is displayed in the compiler output messages except v2.04 (displayed as v2.4) because the bootloader does not handle leading zeros for the minor version. Consider adjusting the maximum upload size as per these instructions: [Changing the maximum sketch size of the Arduino IDE](https://gist.github.com/Ircama/22707e938e9c8f169d9fe187797a2a2c#user-content-changing-the-maximum-sketch-size-of-the-arduino-ide) to ensure all program space is available.
+The version is displayed in the compiler output message, except v2.04 (displayed as v2.4) because the bootloader does not handle leading zeros for the minor version. Consider adjusting the maximum upload size as per these instructions: [Changing the maximum sketch size of the Arduino IDE](https://gist.github.com/Ircama/22707e938e9c8f169d9fe187797a2a2c#user-content-changing-the-maximum-sketch-size-of-the-arduino-ide) to ensure all program space is available.
 
 Want to program the bootloader but don't want to compile the code? Versions 2.xx with PB0 entry jumper (the push button) are in the firmware folder.
 
