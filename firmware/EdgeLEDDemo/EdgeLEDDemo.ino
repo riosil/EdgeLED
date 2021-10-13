@@ -28,10 +28,10 @@ FASTLED_USING_NAMESPACE
 #define COLOR_ORDER GRB        // the latest Neopixels and similar
 #define NUM_LEDS    5          // set number of LEDs in strip here
 #define FRAMES_PER_SECOND 100  // set 100 or 120 (2x mains freq), not critical
-#define BRIGHTNESS_MIN    24   // adjust to suit taste
+#define BRIGHTNESS_MIN    20   // adjust to suit taste
 #define BRIGHTNESS_MAX    255  // adjust to suit taste
 
-uint8_t brightness =  BRIGHTNESS_MIN; // initial brightness
+uint8_t brightness =  int((BRIGHTNESS_MIN + BRIGHTNESS_MAX)/2); // initial brightness
 
 CRGB leds[NUM_LEDS];
 
@@ -64,15 +64,13 @@ void setup() {
   // tell FastLED about the LED strip configuration
   FastLED.addLeds<LED_TYPE,DATA_PIN,COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
 
-  // set master brightness control
-  //brightness = (BRIGHTNESS_MIN + BRIGHTNESS_MAX)/2; // set mid initial brightness
   FastLED.setBrightness(brightness);
 }
 
 
 // List of patterns to cycle through.  Each is defined as a separate function below.
 typedef void (*SimplePatternList[])();
-SimplePatternList gPatterns = { rainbow, red, orange, yellow, green, blue, indigo, violet };
+SimplePatternList gPatterns = { rainbow, red, orange, green, blue, white };
 
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
 uint8_t gHue = 0;                  // rotating "base color" used by many of the patterns
@@ -132,7 +130,7 @@ void rainbow() {
   // Either FastLED's built-in rainbow generator
   //fill_rainbow( leds, NUM_LEDS, gHue, 3);
   // or this version cycles through pastel shades
-  fill_solid( leds, NUM_LEDS, CHSV(gHue, 112, 255));
+  fill_solid( leds, NUM_LEDS, CHSV(gHue, 127, 255));
 }
 
 void red() {
@@ -143,10 +141,6 @@ void orange() {
   fill_solid( leds, NUM_LEDS, CRGB::Orange);
 }
 
-void yellow() {
-  fill_solid( leds, NUM_LEDS, CRGB::Yellow);
-}
-
 void green() {
   fill_solid( leds, NUM_LEDS, CRGB::Green);
 }
@@ -155,10 +149,6 @@ void blue() {
   fill_solid( leds, NUM_LEDS, CRGB::Blue);
 }
 
-void indigo() {
-  fill_solid( leds, NUM_LEDS, CRGB::Indigo);
-}
-
-void violet() {
-  fill_solid( leds, NUM_LEDS, CRGB::Violet);
+void white() {
+  fill_solid( leds, NUM_LEDS, CRGB::White);
 }
