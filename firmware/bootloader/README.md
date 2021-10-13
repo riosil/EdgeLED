@@ -40,11 +40,11 @@ Change:
 
     digispark-tiny.upload.maximum_size=6012
 
-To (bootloader version 2.04):
+to (bootloader version 2.04):
 
     digispark-tiny.upload.maximum_size=6522
 
-Or (bootloader version 2.5):
+or (bootloader version 2.5):
 
     digispark-tiny.upload.maximum_size=6586
 
