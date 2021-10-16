@@ -32,7 +32,6 @@ FASTLED_USING_NAMESPACE
 #define BRIGHTNESS_MAX    255  // adjust to suit taste
 
 uint8_t brightness =  int((BRIGHTNESS_MIN + BRIGHTNESS_MAX)/2); // initial brightness
-
 CRGB leds[NUM_LEDS];
 
 void setup() {
@@ -73,7 +72,8 @@ SimplePatternList gPatterns = { rainbow, red, orange, green, blue, white };
 
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
 uint8_t gHue = 0;                  // rotating "base color" used by many of the patterns
-  
+
+
 void loop()
 {
   // Call the current pattern function once, updating the 'leds' array
