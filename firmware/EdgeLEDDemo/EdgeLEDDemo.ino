@@ -4,8 +4,8 @@ FASTLED_USING_NAMESPACE
 // FastLED code modified from 'DemoReel100' example.
 // -Mark Kriegsman, December 2014
 // Modified by Steve Carey June 2019 for Edge LED lighting demo.
-// Each button press cycles the display from rainbow fade then
-// the colours of the rainbow (R-O-Y-G-B-I-V).
+// Each button press cycles the display from a pastel rainbow fade then
+// then five fixed colours; red, orange, green, blue, white.
 // Check number of LEDs (NUM_LEDS), bootloader version (1.xx or 2.xx),
 // and whether phototransistor is fitted in the defines below,
 // bootloader version is diplayed just before program upload.
@@ -63,7 +63,6 @@ void setup() {
   
   // tell FastLED about the LED strip configuration
   FastLED.addLeds<LED_TYPE,DATA_PIN,COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
-
   FastLED.setBrightness(brightness);
 }
 
