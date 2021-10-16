@@ -88,9 +88,9 @@ void loop()
   // do some periodic updates
   EVERY_N_MILLISECONDS(100) {
     if (!digitalRead(PB0)) {
-      fill_solid( leds, NUM_LEDS, CRGB::Black);
+      fill_solid( leds, NUM_LEDS, CRGB::Black);  // feedback - blink LEDs
       FastLED.show();
-      delay(600);
+      FastLED.delay(600);
       nextPattern();
     }
     gHue++;
@@ -138,7 +138,8 @@ void red() {
 }
 
 void orange() {
-  fill_solid( leds, NUM_LEDS, CRGB::Orange);
+  //fill_solid( leds, NUM_LEDS, CRGB::Orange);   // looks like yellow?
+  fill_solid( leds, NUM_LEDS, CHSV(16,255,255)); // try this one instead.
 }
 
 void green() {
