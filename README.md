@@ -21,12 +21,13 @@ The controller uses a ATtiny85 programmed with the [Micronucleus](https://github
 Install the board into the Arduino IDE by following these [instructions](http://digistump.com/wiki/digispark/tutorials/connecting) for the Digispark:
 
 
-* File → Preferences → Additional Board Manager URLs, enter:
-* http://digistump.com/package_digistump_index.json (separate multiple entries with commas)
-* Tools → Board → Boards Manager, Filter on 'Digispark' then Install.
-* Select the board: 'Digispark (Default - 16.5MHz)'.
+* File → Preferences → Additional Board Manager URLs, enter:  
+http://digistump.com/package_digistump_index.json  
+(separate multiple entries with commas)
+* Tools → Board → Boards Manager, Filter on 'Digispark' then Install.  
+Select the board: 'Digispark (Default - 16.5MHz)'.
 
-The Digispark driver is not recommended. Windows 10 users should follow the [Zadig driver installer guide](https://github.com/micronucleus/micronucleus/tree/master/windows_driver_installer). Linux and OS X users do not require custom drivers.
+Windows 10 users should follow the [Zadig driver installer guide](https://github.com/micronucleus/micronucleus/tree/master/windows_driver_installer). Linux and OS X users do not require custom drivers.
 
 When creating Arduino sketches note the push button is on pin PB0 (active low) and the LED data is on pin PB1. To upload a sketch into the controller; click the Arduino IDE upload button, plug in the controller holding the push button down when this message appears (the button can be released after a second):
 
