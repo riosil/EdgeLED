@@ -72,8 +72,9 @@ typedef void (*SimplePatternList[])();
 SimplePatternList gPatterns = { ramp, normal, flash };
 
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
-uint8_t gSat = 0;                  // variable colour saturation
+uint8_t gSat = 0;                  // variable colour saturation (the S in HSV space)
 uint8_t gVal = 0;                  // variable brightness (the V in HSV space)
+uint8_t newSat = 0;                 // scratchpad saturation value
 
 
 void loop()
@@ -106,12 +107,15 @@ void loop()
     // This low level code is very space efficient - just 56 bytes!
     ADCSRA |= (1 << ADSC);         // start ADC measurement
     while (ADCSRA & (1 << ADSC) ); // wait till conversion complete
+    // If light level is above a threshold, brightness ramps up, one
+    // step every 100ms.
     if (ADCH > 254) {
       brightness -= 1;
       if (brightness <= BRIGHTNESS_MIN) brightness = BRIGHTNESS_MIN;
     }
     else {
-      // must be done in this order to avoid wrap-around at when max=255
+      // If light level is below a threshold, brightness ramps down, one
+      // step every 100ms.
       if (brightness >= BRIGHTNESS_MAX) brightness = (BRIGHTNESS_MAX-1);
       brightness += 1;
     }
@@ -145,13 +149,22 @@ void flash() {
 }
 
 void ramp() {
+  // Represent the growth of Makespace in light!
+  // Note gSat increments by 1 every 100ms,
+  // ramp up HSV Value to max in increments of 8
+  // ramp up Saturation in increments of 4
+  // until wrap around above gSat = 255
   if (gSat < 32) gVal = gSat * 8;
   else gVal = 255;
+  if (gSat < 64) newSat = gSat * 4;
+  else newSat = 255;
+  // Set rear row, green
   for (int i = 0; i < 9; i++) {
-    leds[i] = CHSV(12, gSat, gVal);
+    leds[i] = CHSV(12, newSat, gVal);
   }
+  // Set front row, orange
   for (int i = 9; i < 18; i++) {
-    leds[i] = CHSV(96 , gSat, gVal);
+    leds[i] = CHSV(96 ,newSat, gVal);
   }
 }
 
