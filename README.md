@@ -4,7 +4,7 @@ Tiny controller for addressable LEDs to enable LED strips in tiny spaces - ideal
 
 ![Example edge lit sign](https://raw.githubusercontent.com/riosil/EdgeLEDcontroller/master/images/keep_calm_sign.jpg)
 
-This prototype was made in Makespace, Cambridge. There is an example two-layer display at the end of the video: https://www.instagram.com/p/CSuGmHmoO2C/
+This prototype was made in Makespace, Cambridge. There is an example two-layer display at the end of the video: [Makespace video](https://www.instagram.com/p/CSuGmHmoO2C/)
 
 The base is made of three layers of laser cut plywood with a laser engraved channel at the bottom for the LED strip. M3 nuts are embedded between layers before bonding. [Slide binders](https://www.amazon.co.uk/gp/product/B00JPJA7QY) can also be used to clip LED strips onto the edge 5mm thick acrylic, ideal for hanging signs.
 
