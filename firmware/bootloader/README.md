@@ -1,6 +1,13 @@
 ## Bootloader
 
-Programming the bootloader is only required if the bootloader becomes corrupted
+Programming the bootloader is only required if the bootloader becomes corrupted. The V2.x upload executable is backwards compatible to the V1.x bootloader.
+
+| Bootloader | size (bytes) | Program space (bytes) |
+|------------|--------------|-----------------------|
+| v1.11      | 1850 | 6330 |
+| v2.04      | 1622 | 6522 |
+| v2.5       | 1540 | 6586 |
+| v2.6       | 1542 | 6586 |
 
 ### AVRDUDE and Bus Pirate
 
