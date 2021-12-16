@@ -1,10 +1,6 @@
-## Bootloader
+## Bootloader Programming
 
-
-
-## Programming
-
-Programming the bootloader is only required if the bootloader becomes corrupted. The V2.x upload executable is backwards compatible to the V1.x bootloader.
+Programming the bootloader is only required if the bootloader becomes corrupted or a new feature is required. The V2.x upload executable is backwards compatible with the V1.x bootloader.
 
 | Bootloader | size (bytes) | Program space (bytes) |
 |------------|--------------|-----------------------|
@@ -18,7 +14,7 @@ Programming the bootloader is only required if the bootloader becomes corrupted.
 See:  
 https://www.fischl.de/usbasp/
 
-    avrdude -c usbasp -p t85 -U micronucleus-2.5-entry_jumper_pb0.hex -U lfuse:w:0xe1:m -U hfuse:w:0xdd:m -U efuse:w:0xfe:m
+    avrdude -c usbasp -p t85 -U micronucleus-2.6-entry_jumper_pb0.hex -U lfuse:w:0xe1:m -U hfuse:w:0xdd:m -U efuse:w:0xfe:m
 
 ### Connections:
 
