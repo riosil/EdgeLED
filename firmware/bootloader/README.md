@@ -1,5 +1,9 @@
 ## Bootloader
 
+
+
+## Programming
+
 Programming the bootloader is only required if the bootloader becomes corrupted. The V2.x upload executable is backwards compatible to the V1.x bootloader.
 
 | Bootloader | size (bytes) | Program space (bytes) |
@@ -9,18 +13,7 @@ Programming the bootloader is only required if the bootloader becomes corrupted.
 | v2.5       | 1540 | 6586 |
 | v2.6       | 1542 | 6586 |
 
-### AVRDUDE and Bus Pirate
-
-See:  
-http://www.nongnu.org/avrdude/
-
-http://dangerousprototypes.com/docs/Bus_Pirate_AVR_Programming
-
-Example *(adjust port for operating system):*
-
-    avrdude -c buspirate -P com2 -p t85 -U micronucleus-2.5-entry_jumper_pb0.hex -U lfuse:w:0xe1:m -U hfuse:w:0xdd:m -U efuse:w:0xfe:m
-
-### AVRDUDE and USBasp:
+### AVRDUDE with USBasp:
 
 See:  
 https://www.fischl.de/usbasp/
@@ -38,7 +31,18 @@ https://www.fischl.de/usbasp/
 |  MISO      | MISO (J3-3) |
 |  CLK       | SCK  (J2-2) |
 
-## Arduino IDE
+### AVRDUDE with Bus Pirate
+
+See:  
+http://www.nongnu.org/avrdude/
+
+http://dangerousprototypes.com/docs/Bus_Pirate_AVR_Programming
+
+Example *(adjust port for operating system):*
+
+    avrdude -c buspirate -P com2 -p t85 -U micronucleus-2.6-entry_jumper_pb0.hex -U lfuse:w:0xe1:m -U hfuse:w:0xdd:m -U efuse:w:0xfe:m
+
+#### Check available space
 
 To make use of the maximum available program space, change the size in ***boards.txt*** for the Digistump board. In Windows this is located in:
 
@@ -52,14 +56,17 @@ to (bootloader version 2.04):
 
     digispark-tiny.upload.maximum_size=6522
 
-or (bootloader version 2.5):
+or (bootloader versions 2.5 - 2.6):
 
     digispark-tiny.upload.maximum_size=6586
 
+Available program space is always an integer multiple of the page size, 64 bytes.
+
 ## Licence
 
-The Micronucleus bootloader is released under the GPLv2 license.
+The Micronucleus bootloader is released under the GPLv2 license which is in turn based on OBJECTIVE DEVELOPMENT GmbH's V-USB driver, also GPLv2.
 
-https://github.com/micronucleus/
+https://github.com/micronucleus/  
+https://www.obdev.at/products/vusb/index.html
 
-In addition the Micronucleus team request that derivitive products are added to their "Devices using Micronucleus" list. This has not been done because I have not yet offered an EdgeLED for sale.
+The Micronucleus team request that derivitive products are added to their "Devices using Micronucleus" list. This has not been done because EdgeLED has not been offerred for sale.
