@@ -1,36 +1,39 @@
 #include <FastLED.h>
 FASTLED_USING_NAMESPACE
 
-// FastLED code modified from 'DemoReel100' example.
-// -Mark Kriegsman, December 2014
-// TWO ROWS OF 9 LEDs, USED FOR MAKESPACE SIGN
-// Modified by Steve Carey June 2019 for Edge LED lighting demo.
-// Each button press cycles the display from a pastel rainbow fade then
-// then five fixed colours; red, orange, green, blue, white.
+// FastLED code modified from 'DemoReel100' example
+// by Mark Kriegsman, December 2014.
+//
+// Modified by Steve Carey Dec 2021 for EdgeLED controller.
+// Released under GNU GENERAL PUBLIC LICENSE version 3 (GPLv3)
+// http://www.gnu.org/licenses/gpl-3.0.html
+
 // Check number of LEDs (NUM_LEDS), bootloader version (1.xx or 2.xx),
 // and whether phototransistor is fitted in the defines below,
-// bootloader version is diplayed just before program upload.
+// Bootloader version is diplayed in the progress window just
+// before program upload.
 
-#if defined(FASTLED_VERSION) && (FASTLED_VERSION < 3001000)
-#warning "Requires FastLED 3.1 or later; check github for latest code."
-#endif
-
-// This is required for v2.xx bootloaders to stop "Unknown device" pop-up
-// in Windows if the user program does not have USB functionality itself, 
+// Required for v2.xx bootloaders to stop "Unknown device" pop-up in
+// Windows if the user program does not have USB functionality itself, 
 // not required for v1.11 since user program USB is disabled by default.
 // For version 1.11 bootloader, comment out the next line.
 #define BOOTLOADER_VER_2
 
-// Is SFH3710 phototransistor fitted?
+// Is SFH3710 phototransistor fitted? Comment out the next line. if no
+// phototransistor is fitted.
 #define PHOTOTRANSISTOR
+
+#if defined(FASTLED_VERSION) && (FASTLED_VERSION < 3001000)
+#warning "Requires FastLED 3.1 or later; check github for latest code."
+#endif
 
 #define DATA_PIN    1          // pin for LED data
 #define LED_TYPE    WS2812B    // the latest Neopixels and similar
 #define COLOR_ORDER GRB        // the latest Neopixels and similar
 #define NUM_LEDS    18         // set number of LEDs in strip here
 #define FRAMES_PER_SECOND 100  // set 100 or 120 (2x mains freq), not critical
-#define BRIGHTNESS_MIN    20   // adjust to suit taste
-#define BRIGHTNESS_MAX    254  // adjust to suit taste
+#define BRIGHTNESS_MIN     16  // adjust to suit taste
+#define BRIGHTNESS_MAX    255  // adjust to suit taste
 
 uint8_t brightness = int((BRIGHTNESS_MIN + BRIGHTNESS_MAX)/2); // initial brightness
 CRGB leds[NUM_LEDS];
@@ -103,21 +106,22 @@ void loop()
     // The phototransistor is not sensitive enough for continuous
     // brightness adjustness at low ambient light levels - it simply
     // detects whether there is any significant ambient light and
-    // makes the display smoothly dim or brighten over approx 10-20s.
+    // makes the display smoothly dim or brighten over approx 25s.
     // This low level code is very space efficient - just 56 bytes!
     ADCSRA |= (1 << ADSC);         // start ADC measurement
     while (ADCSRA & (1 << ADSC) ); // wait till conversion complete
-    // If light level is above a threshold, brightness ramps up, one
-    // step every 100ms.
-    if (ADCH > 254) {
+    // If light intensity is above a threshold, brightness ramps up,
+    // one step every 100ms. Note the value in ADCH is inversely
+    // proportional to light intensity. Threshold range is typically
+    // 230-254 since this basic circuit is not very sensitive. The
+    // long (25s) time constant averages out detector noise.
+    if (ADCH > 244) {
       brightness -= 1;
-      if (brightness <= BRIGHTNESS_MIN) brightness = BRIGHTNESS_MIN;
+      if (brightness < BRIGHTNESS_MIN) brightness = BRIGHTNESS_MIN;
     }
     else {
-      // If light level is below a threshold, brightness ramps down, one
-      // step every 100ms.
-      if (brightness >= BRIGHTNESS_MAX) brightness = (BRIGHTNESS_MAX-1);
-      brightness += 1;
+      if (brightness >= BRIGHTNESS_MAX) brightness = BRIGHTNESS_MAX - 1;
+      brightness += 1;   // this ensures brightness never rolls over 255
     }
     FastLED.setBrightness(brightness);
     #endif

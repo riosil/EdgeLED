@@ -7,6 +7,13 @@ FASTLED_USING_NAMESPACE
 // Modified by Steve Carey Dec 2021 for EdgeLED controller.
 // Released under GNU GENERAL PUBLIC LICENSE version 3 (GPLv3)
 // http://www.gnu.org/licenses/gpl-3.0.html
+//
+// The LEDs are numbered (2 row example):
+//                                          cable
+// ┌────────────────────────╨─┐
+// │  8    7    6    5    4    3    2    1    0  │
+// │  9   10   11   12   13   14   15   16   17  │
+// └──────────────────────────┘
 
 // Check number of LEDs (NUM_LEDS), bootloader version (1.xx or 2.xx),
 // and whether phototransistor is fitted in the defines below,
@@ -30,12 +37,12 @@ FASTLED_USING_NAMESPACE
 #define DATA_PIN    1          // pin for LED data
 #define LED_TYPE    WS2812B    // the latest Neopixels and similar
 #define COLOR_ORDER GRB        // the latest Neopixels and similar
-#define NUM_LEDS    6          // set number of LEDs in strip here
+#define NUM_LEDS    18         // set number of LEDs in strip here
 #define FRAMES_PER_SECOND 100  // set 100 or 120 (2x mains freq), not critical
-#define BRIGHTNESS_MIN     16  // adjust to suit taste
+#define BRIGHTNESS_MIN    16   // adjust to suit taste
 #define BRIGHTNESS_MAX    255  // adjust to suit taste
 
-uint8_t brightness =  int((BRIGHTNESS_MIN + BRIGHTNESS_MAX)/2); // initial brightness
+uint8_t brightness = int((BRIGHTNESS_MIN + BRIGHTNESS_MAX)/2); // initial brightness
 CRGB leds[NUM_LEDS];
 
 void setup() {
@@ -72,31 +79,42 @@ void setup() {
 
 // List of patterns to cycle through.  Each is defined as a separate function below.
 typedef void (*SimplePatternList[])();
-SimplePatternList gPatterns = { flash, pastels, red, orange, green, blue, white };
+SimplePatternList gPatterns = { white, pink, purple };
 
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
-uint8_t gHue = 0;                  // rotating "base color" used by many of the patterns
+uint8_t gSat = 0;                  // variable colour saturation (the S in HSV space)
+uint8_t gVal = 0;                  // variable brightness (the V in HSV space)
+uint8_t gLoop = 0;                 // main loop count
+uint8_t hLoop = 0;                 // inner loop for heartbeat pattern
+uint8_t heartHue = 0;              // heart colour, 0 is full red (order purple-red-orange)
 
 
-void loop()
-{
-  // Call the current pattern function once, updating the 'leds' array
-  gPatterns[gCurrentPatternNumber]();
+void loop() {
+  
+  // Heartbeat loop, start at approx 60bpm
+  EVERY_N_MILLISECONDS_I(period, 33) {
+    // Call the current pattern function once, updating the 'leds' array
+    gPatterns[gCurrentPatternNumber]();
+    // send the 'leds' array out to the actual LED strip
+    FastLED.show();
+    // insert a delay to keep the framerate modest
+    FastLED.delay(1000/FRAMES_PER_SECOND);
 
-  // send the 'leds' array out to the actual LED strip
-  FastLED.show();  
-  // insert a delay to keep the framerate modest
-  FastLED.delay(1000/FRAMES_PER_SECOND); 
+    // set heart bpm from light sensor,
+    // 38 is approx 50bpm, 16 is approx 120bpm
+    period.setPeriod(39 - brightness/11);
+    gLoop++;
+  }
 
-  // do some periodic updates
+  // Do other periodic stuff,
+  // check for button press and adjust brightness
   EVERY_N_MILLISECONDS(100) {
     if (!digitalRead(PB0)) {
-      fill_solid( leds, NUM_LEDS, CRGB::Black);  // feedback - blink LEDs
+      fill_solid( leds, NUM_LEDS, CRGB::Black);
       FastLED.show();
-      FastLED.delay(600);
+      FastLED.delay(500);
       nextPattern();
     }
-    gHue++;
     #ifdef PHOTOTRANSISTOR
     // Dim the display if there is negligible ambient light.
     // Uses a SFH3710 phototransistor (emiter-GND, collector-SCK),
@@ -113,7 +131,7 @@ void loop()
     // proportional to light intensity. Threshold range is typically
     // 230-254 since this basic circuit is not very sensitive. The
     // long (25s) time constant averages out detector noise.
-    if (ADCH > 244) {
+    if (ADCH > 248) {
       brightness -= 1;
       if (brightness < BRIGHTNESS_MIN) brightness = BRIGHTNESS_MIN;
     }
@@ -134,42 +152,84 @@ void nextPattern()
   gCurrentPatternNumber = (gCurrentPatternNumber + 1) % ARRAY_SIZE( gPatterns);
 }
 
-void flash() {
-  if ((gHue & B00001111) > 7) {
-    fill_solid( leds, NUM_LEDS, CRGB::Red);
-    for (int i=1; i <= NUM_LEDS; i=i+2) {
-      leds[i] = CRGB::Blue;
-    }
-  }
-  else {
-    fill_solid( leds, NUM_LEDS, CRGB::Blue);
-    for (int i=1; i <= NUM_LEDS; i=i+2) {
-      leds[i] = CRGB::Red;
-    }
-  }
-}
-
-void pastels() {
-  fill_solid( leds, NUM_LEDS, CHSV(gHue, 160, 255));
-}
-
-void red() {
-  fill_solid( leds, NUM_LEDS, CRGB::Red);
-}
-
-void orange() {
-  //fill_solid( leds, NUM_LEDS, CRGB::Orange);   // looks like yellow?
-  fill_solid( leds, NUM_LEDS, CHSV(16,255,255)); // try this one instead.
-}
-
-void green() {
-  fill_solid( leds, NUM_LEDS, CRGB::Green);
-}
-
-void blue() {
-  fill_solid( leds, NUM_LEDS, CRGB::Blue);
-}
-
 void white() {
-  fill_solid( leds, NUM_LEDS, CRGB::White);
+  if (hLoop == 8) frontText(0,0);
+  heartbeat();
+}
+
+void pink() {
+  if (hLoop == 8) frontText(234,127);
+  heartbeat();
+}
+
+void purple() {
+  if (hLoop == 8) frontText(213,255);
+  heartbeat();
+}
+
+void heartbeat() {
+  // The text/star area is static, star twinkle effect.
+  // Update once per inner loop, after the pulse
+  // one LED is deliberately always off for effect.
+  backText();
+  if( random8() < 32) {
+    leds[ random16(6, 9) ] += CRGB::White;
+  }
+  
+  // This is the heart pulse
+  hLoop = gLoop % 32;
+  switch (hLoop) {
+    case 1:
+      backHeart(171);
+      frontHeart(85);
+      break;
+    case 2:
+      backHeart(85);
+      frontHeart(171);
+      break;
+    case 3:
+      backHeart(0);
+      frontHeart(255);
+      break;
+    case 4:
+      backHeart(0);
+      frontHeart(255);
+      break;
+    case 5:
+      backHeart(85);
+      frontHeart(171);
+      break;
+    case 6:
+      backHeart(171);
+      frontHeart(85);
+      break;
+    default:
+      backHeart(255);
+      frontHeart(0);
+      break;
+  }
+}
+
+void backHeart(int intensity) {
+  for (int i = 0; i < 5; i++) {
+    leds[i] = CHSV(heartHue, 255, intensity);
+  }
+}
+
+void frontHeart(int intensity) {
+  for (int i = 13; i < 18; i++) {
+    leds[i] = CHSV(heartHue, 255, intensity);
+  }
+}
+
+void backText() {
+  for (int i = 6; i < 9; i++) {
+    leds[i] = CRGB::Orange;
+  }
+}
+
+void frontText(uint8_t hue, uint8_t sat) {
+  for (int i = 9; i < 13; i++) {
+    leds[i] = CHSV(hue, sat, 255);
+  }
 }
