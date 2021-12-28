@@ -7,6 +7,13 @@ FASTLED_USING_NAMESPACE
 // Modified by Steve Carey Dec 2021 for EdgeLED controller.
 // Released under GNU GENERAL PUBLIC LICENSE version 3 (GPLv3)
 // http://www.gnu.org/licenses/gpl-3.0.html
+//
+// The LEDs are numbered (2 row example):
+//                                          cable
+// ┌────────────────────────╨─┐
+// │  8    7    6    5    4    3    2    1    0  │
+// │  9   10   11   12   13   14   15   16   17  │
+// └──────────────────────────┘
 
 // Check number of LEDs (NUM_LEDS), bootloader version (1.xx or 2.xx),
 // and whether phototransistor is fitted in the defines below,
