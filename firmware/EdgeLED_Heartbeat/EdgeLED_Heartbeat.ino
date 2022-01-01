@@ -79,7 +79,7 @@ void setup() {
 
 // List of patterns to cycle through.  Each is defined as a separate function below.
 typedef void (*SimplePatternList[])();
-SimplePatternList gPatterns = { white, pink, purple };
+SimplePatternList gPatterns = { pink, purple, white };
 
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
 uint8_t gSat = 0;                  // variable colour saturation (the S in HSV space)
@@ -102,7 +102,7 @@ void loop() {
 
     // set heart bpm from light sensor,
     // 38 is approx 50bpm, 16 is approx 120bpm
-    period.setPeriod(39 - brightness/11);
+    period.setPeriod(38 - brightness/12);
     gLoop++;
   }
 
@@ -129,7 +129,7 @@ void loop() {
     // If light intensity is above a threshold, brightness ramps up,
     // one step every 100ms. Note the value in ADCH is inversely
     // proportional to light intensity. Threshold range is typically
-    // 230-254 since this basic circuit is not very sensitive. The
+    // 240-254 since this basic circuit is not very sensitive. The
     // long (25s) time constant averages out detector noise.
     if (ADCH > 248) {
       brightness -= 1;
@@ -180,28 +180,44 @@ void heartbeat() {
   hLoop = gLoop % 32;
   switch (hLoop) {
     case 1:
-      backHeart(171);
-      frontHeart(85);
+      backHeart(205);
+      frontHeart(51);
       break;
     case 2:
-      backHeart(85);
-      frontHeart(171);
+      backHeart(154);
+      frontHeart(102);
       break;
     case 3:
-      backHeart(0);
-      frontHeart(255);
+      backHeart(102);
+      frontHeart(154);
       break;
     case 4:
+      backHeart(51);
+      frontHeart(205);
+      break;
+    case 5:
       backHeart(0);
       frontHeart(255);
       break;
-    case 5:
-      backHeart(85);
-      frontHeart(171);
-      break;
     case 6:
-      backHeart(171);
-      frontHeart(85);
+      backHeart(0);
+      frontHeart(255);
+      break;
+    case 7:
+      backHeart(51);
+      frontHeart(205);
+      break;
+    case 8:
+      backHeart(102);
+      frontHeart(154);
+      break;
+    case 9:
+      backHeart(154);
+      frontHeart(102);
+      break;
+    case 10:
+      backHeart(205);
+      frontHeart(51);
       break;
     default:
       backHeart(255);
@@ -211,13 +227,15 @@ void heartbeat() {
 }
 
 void backHeart(int intensity) {
-  for (int i = 0; i < 5; i++) {
+  leds[4] = CHSV(heartHue, 255, 255);  // keep overlapping LHS of heart red
+  for (int i = 0; i < 4; i++) {
     leds[i] = CHSV(heartHue, 255, intensity);
   }
 }
 
 void frontHeart(int intensity) {
-  for (int i = 13; i < 18; i++) {
+  leds[13] = CHSV(heartHue, 255, 255);  // keep overlapping LHS of heart red
+  for (int i = 14; i < 18; i++) {
     leds[i] = CHSV(heartHue, 255, intensity);
   }
 }
