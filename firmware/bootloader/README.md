@@ -18,14 +18,16 @@ https://www.fischl.de/usbasp/
 
 ### Connections:
 
-| Programmer |   EdgeLED   |
-|------------|-------------|
-|  GND       | GND  (J3-2) |
-|  +5V       | +5V  (J3-1) |
-| CS / Reset | RST  (J2-1) |
-|  MOSI      | MOSI (J2-3) |
-|  MISO      | MISO (J3-3) |
-|  CLK       | SCK  (J2-2) |
+| Programmer | EdgeLED v1 |  v2  |
+|------------|------------|------|
+|  GND       | GND  J3-2  | J2-6 |
+|  +5V       | +5V  J3-1  | J2-2 |
+| CS / Reset | RST  J2-1  | J2-5 |
+|  MOSI      | MOSI J2-3  | J2-4 |
+|  MISO      | MISO J3-3  | J2-1 |
+|  CLK       | SCK  J2-2  | J2-3 |
+
+EdgeLED V2 uses the common 6-pin ISCP pinout (J2).
 
 ### AVRDUDE with Bus Pirate
 

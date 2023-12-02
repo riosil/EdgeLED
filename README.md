@@ -44,12 +44,13 @@ Space for user code is:
 | v1.11      | 6330                |
 | v2.04      | 6522                |
 | v2.5       | 6586                |
+| v2.6 (current) | 6586            |
 
-The version is displayed in the compiler output message, except v2.04 (displayed as v2.4) because the bootloader does not handle leading zeros for the minor version. Consider adjusting the maximum upload size as per these instructions: [Changing the maximum sketch size of the Arduino IDE](https://gist.github.com/Ircama/22707e938e9c8f169d9fe187797a2a2c#user-content-changing-the-maximum-sketch-size-of-the-arduino-ide) to ensure all program space is available.
+The version is displayed in the compiler output message, except v2.04 (displayed as v2.4 because the bootloader does not handle leading zeros for the minor version). Consider adjusting the maximum upload size as per these instructions: [Changing the maximum sketch size of the Arduino IDE](https://gist.github.com/Ircama/22707e938e9c8f169d9fe187797a2a2c#user-content-changing-the-maximum-sketch-size-of-the-arduino-ide) to ensure all program space is available.
 
 Want to program the bootloader but don't want to compile the code? Versions 2.xx with PB0 entry jumper (the push button) are in the firmware folder.
 
-**Note** if bootloader v2.xx is installed, assert PB3 low to stop USB enumeration messages. See the example sketch for details. Using bootloader 2.xx gives user programs access to USB but this is disabled in all the examples by asserting PB3 low in each sketch setup section.
+**Note** if bootloader v2.xx is installed, assert PB3 in sketch low to stop USB enumeration messages. See the example sketch for details. Using bootloader 2.xx gives user programs access to USB but this is disabled in all the examples by asserting PB3 low in each sketch setup section.
 
 The cable is 4-wire flexible telephone extension cord where the length is limited by transients but 3m has worked OK. It was found that using two ground wires does not significantly reduce transients. 3-wire cable is also acceptable.
 
@@ -75,7 +76,7 @@ This flexible 4mm wide [LED strip](https://www.aliexpress.com/item/32889698964.h
 
 * 13 Oct 2021 - FastLED 3.4 works OK. Added Micronucleus bootloader v2.5. Minor tweak to the example code.
 
-* 29 Dec 2021 - V2.0 board; replace pads for 4-core phone handset cable (2 ground wires) with pads for 3-core cable, move pads for SPI bootloader programming to a separate connector (J2). Note missing ground on J2 pin 6 needs to be added manually.
+* 29 Dec 2021 - V2.0 board; replace pads for 4-core phone handset cable (2 ground wires) with pads for 3-core cable, move pads for ICSP bootloader programming to separate connector (J2). Note missing ground on J2 pin 6 needs to be added manually.
 
 ---
 *© Keep Calm styles, though used in the UK since 1939, may be copyright in the EEA/EU by Keep Calm and Carry On Ltd.*
