@@ -14,7 +14,7 @@ The LEDs are type WS2812B (aka Neopixels) or SK6812 LEDs in 3.5mm square package
 
 ![Edge LED controller](images/usb_board_v2.jpg)
 
-*Version 2 board: 3-core cable and separate SPI bootloader programming pins*
+*Version 2 board: 3-core cable and separate ICSP bootloader programming pins*
 
 ## Programming
 
