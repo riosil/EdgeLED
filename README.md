@@ -2,7 +2,7 @@
 
 Tiny controller for addressable LEDs to enable LED strips in tiny spaces - ideal for edge lighting laser cut acrylic signs.
 
-![Example edge lit sign](https://raw.githubusercontent.com/riosil/EdgeLEDcontroller/master/images/keep_calm_sign.jpg)
+![Example edge lit sign](images/keep_calm_sign.jpg)
 
 This prototype was made in Makespace, Cambridge. There is an example two-layer display at the end of the video: [Makespace video](https://www.instagram.com/p/CSuGmHmoO2C/)
 
@@ -12,7 +12,9 @@ The LEDs are type WS2812B (aka Neopixels) or SK6812 LEDs in 3.5mm square package
 
 **Security:** by default the controller only takes power from the USB - it only requires power from a USB charger. If plugged into a computer, it will not enumerate as a USB device unless the on-board switch is held down as the plug is inserted. This tiny switch is hard to operate accidentally.
 
-![Edge LED controller](https://raw.githubusercontent.com/riosil/EdgeLEDcontroller/master/images/usb_board.jpg)
+![Edge LED controller](images/usb_board_v2.jpg)
+
+*Version 2 board: 3-core cable and separate SPI bootloader programming pins*
 
 ## Programming
 
@@ -51,7 +53,7 @@ Want to program the bootloader but don't want to compile the code? Versions 2.xx
 
 The cable is 4-wire flexible telephone extension cord where the length is limited by transients but 3m has worked OK. It was found that using two ground wires does not significantly reduce transients. 3-wire cable is also acceptable.
 
-![Flexible 5mm wide LED strip](https://raw.githubusercontent.com/riosil/EdgeLEDcontroller/master/images/led_flex_strip.jpg)
+![Flexible 5mm wide LED strip](images/led_flex_strip.jpg)
 
 ## Files
 
@@ -65,13 +67,15 @@ This flexible 4mm wide [LED strip](https://www.aliexpress.com/item/32889698964.h
 
 ## Updates
 
-* 6 June 2019 - received a batch of SFH3710 phototransistors from China. Simple mod enables auto dimming in the dark. See comments in the example sketch.
+* 6 June 2019 - optional SFH3710 phototransistor mod enables auto dimming in the dark. See comments in the example sketch.
 
 * 9 June 2019 - issues found with recent releases of the FastLED library; version 3.2.7 fails to compile for the ATtiny85, version 3.2.8 uses 48% more program memory for the example sketch. Last known working version of FastLED is 3.2.6. Fixed with release 3.2.9.
 
 * 9 Feb 2020 - FastLED is broken again with version 3.3.3, use version 3.3.2 until a fix is released.
 
-* 13 Oct 2021 - FastLED 3.4 works OK. Added Micronucleus bootloader v2.5. Minor tweak to the example code. 
+* 13 Oct 2021 - FastLED 3.4 works OK. Added Micronucleus bootloader v2.5. Minor tweak to the example code.
+
+* 29 Dec 2021 - V2.0 board; replace pads for 4-core phone handset cable (2 ground wires) with pads for 3-core cable, move pads for SPI bootloader programming to a separate connector (J2). Note missing ground on J2 pin 6 needs to be added manually.
 
 ---
 *© Keep Calm styles, though used in the UK since 1939, may be copyright in the EEA/EU by Keep Calm and Carry On Ltd.*
