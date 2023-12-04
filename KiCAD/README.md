@@ -1,7 +1,13 @@
-Board version 2.1 last edited with KiCAD 7.09.
+## Computer Aided Manufature
 
-Gerber and assembly files (PCBA) for [JLCPCB](https://jlcpcb.com) are included in CAM the folder.
+**KiCAD 7 Files**
 
-![](CAM/jlcpcb_screenshot.jpg)
+Gerber files (plus assembly files optimised for [JLCPCB](https://jlcpcb.com)) are in the CAM the folder.
+
+Recommended finish is ENIG, board thickness 1.6mm.
+
+**There is no warranty that these files are error free (repo licence applies).**
+
+![](../images/jlcpcb_screenshot.jpg)
 
 *JLCPCB online pre-view*

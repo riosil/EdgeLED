@@ -18,7 +18,7 @@ https://www.fischl.de/usbasp/
 
 ### Connections:
 
-| Programmer | EdgeLED v1 |  v2  |
+| Programmer | board v1 |  v2  |
 |------------|------------|------|
 |  GND       | GND  J3-2  | J2-6 |
 |  +5V       | +5V  J3-1  | J2-2 |
