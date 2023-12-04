@@ -1,14 +1,12 @@
 # EdgeLEDcontroller
 
-Tiny controller for addressable LEDs in tiny spaces - ideal for edge lit acrylic signs.
+Tiny controller for addressable LEDs in tiny spaces - ideal for engraved edge-lit acrylic displays.
 
 ![Example edge lit sign](images/keep_calm_sign.jpg)
 
-This example was made in Makespace, Cambridge and another example is at the end of this video: [Makespace 2-layer sign](https://www.instagram.com/p/CSuGmHmoO2C/).
+This was made in Makespace, Cambridge. There is a 2-layer example at the end of this [video](https://www.instagram.com/p/CSuGmHmoO2C/).
 
-The base is made of three layers of laser cut plywood with a laser engraved channel in the base for the LED strip. M3 nuts are embedded between the top two bonded layers. Or the LED connections can be sealed with adhesive lined heat shrink tubing (4.8mm dia.) and [slide binders](https://www.amazon.co.uk/gp/product/B00JPJA7QY) to clip the LED strips onto the panel - ideal for hanging signs.
-
-The LEDs are type WS2812B (aka Neopixels) or SK6812 LEDs in 3.5mm square packages. The controller is built into a USB plug and programmed with Arduino sketches through USB. Having the controller built in the plug allows the LED strip to fit in very slim spaces.
+The base is made of three layers of laser cut plywood with a laser engraved channel in the base for the LED strip. M3 nuts are embedded between the top two bonded layers. Alternatively the LED connections can be sealed with adhesive lined heat shrink tubing (4.8mm dia.) and [slide binders](https://www.amazon.co.uk/gp/product/B00JPJA7QY) used to clip the LEDs to the panel - ideal for hanging signs.
 
 **Security:** by default the controller only takes power from the USB - it only requires a USB charger. If plugged into a computer, it will not enumerate as a USB device unless the on-board switch is held down as the plug is inserted.
 
@@ -17,6 +15,8 @@ The LEDs are type WS2812B (aka Neopixels) or SK6812 LEDs in 3.5mm square package
 *Version 2 board: 3-core cable and separate ICSP bootloader programming pins*
 
 The cable is 4-wire flexible telephone extension cord (V1 board) or 3-core 28AWG cable, 3.5mm diameter (V2 boards). The maximum length is limited by cable capacitance, 2m maximum is recommended. It was found that using two ground wires does not improve performance.
+
+The LEDs are type WS2812B (aka Neopixels) or SK6812 LEDs in 3.5mm square packages. The controller is built into a USB plug and programmed with Arduino sketches through USB. Having the controller built in the plug allows the LED strip to fit in very slim spaces.
 
 ![Flexible 5mm wide LED strip](images/led_flex_strip.jpg)
 
