@@ -24,23 +24,15 @@ The preferred LED strip, 4mm wide, is from [AliExpress](https://www.aliexpress.c
 
 ## Programming
 
-The controller uses a ATtiny85 programmed with the [Micronucleus](https://github.com/micronucleus/) bootloader. The controller will only appear as a programmable device if the button (on PB0) is pressed as it is plugged into the USB host. Programs can then be loaded via USB using the Arduino IDE with board selection set to: "Digispark (Default - 16.5MHz)."
+The controller uses a ATtiny85 programmed with the [Micronucleus](https://github.com/micronucleus/) bootloader. The controller will only appear as a programmable device if the button (on PB0) is pressed as it is plugged into the USB host. Code can then be loaded via USB using the Arduino IDE.
 
-Install the board into the Arduino IDE by following these [instructions](http://digistump.com/wiki/digispark/tutorials/connecting) for the Digispark:
+Install the board into the Arduino IDE by following instructions from the repo of choice:
 
+* [Digispark / DigiStump](http://digistump.com/wiki/digispark/tutorials/connecting) site unavailable since Aug 2024
+* [Digistump fork](https://github.com/ArminJo/DigistumpArduino) by ArminJo (deprecated since 2023 but works). Select board: "Digistump AVR Boards" → "Digistump"
+* [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) by SpenceKonde. Select board: "ATTinyCore" → "ATtiny85 (Micronucleus / DigiSpark)"
 
-* File → Preferences → Additional Board Manager URLs, enter:  
-http://digistump.com/package_digistump_index.json  
-(separate multiple entries with commas)
-* Tools → Board → Boards Manager, Filter on 'Digispark' then Install.  
-Select the board: 'Digispark (Default - 16.5MHz)'.
-
-Windows 10 users should follow the [Zadig driver installer guide](https://github.com/micronucleus/micronucleus/tree/master/windows_driver_installer). Linux and OS X users do not require custom drivers.
-
-When creating Arduino sketches note the push button is on pin PB0 (active low) and the LED data is on pin PB1. To upload a sketch into the controller; click the Arduino IDE upload button, plug in the controller holding the push button down when this message appears (the button can be released after a second):
-
-> Running Digispark Uploader...  
-> Plug in device now... (will timeout in 60 seconds)
+When creating Arduino sketches note the push button is on pin PB0 (active low) and the LED data pin is PB1. To upload a sketch to the controller; click the Arduino IDE upload button and plug in the controller while holding the push button down (the button can be released after enumeration, normally about one second):
 
 Space for user code is:
 
@@ -54,9 +46,7 @@ Space for user code is:
 
 Ready compiled bootloader hex files are in the [firmware](firmware/bootloader) folder. It should only be necessary to upload the bootloader either after construction or for an update (I have never seen a bootloader become corrupted).
 
-**Tip1:** consider adjusting the maximum upload size as per these instructions: [Changing the maximum sketch size of the Arduino IDE](https://gist.github.com/Ircama/22707e938e9c8f169d9fe187797a2a2c#user-content-changing-the-maximum-sketch-size-of-the-arduino-ide) to ensure all program space is available.
-
-**Tip2:** if bootloader v2.x is installed, assert PB3 low to prevent USB enumeration messages. See example sketch for details. Using bootloader 2.x gives user programs access to USB but this is disabled in all examples by asserting PB3 low in the setup section.
+**Tip:** if you only use the USB port for power, asserting PB3 low at the beginning of the sketch will prevent annoying USB enumeration messages or beeps. (The controller can still be re-programmed by holding the push button down during USB insertion).
 
 ## Firmware Files
 
